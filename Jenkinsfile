@@ -21,10 +21,12 @@ pipeline {
 
                 // Run Maven clean.
                 sh '''
-                mvn clean verify \
-                -Dwebdriver.driver=chrome \
-                -Dchrome.switches="$HEADLESS_OPTS"
+                mvn clean test -Dcucumber.options="classpath:features"
                 '''
+
+                //mvn clean verify \
+                // -Dwebdriver.driver=chrome \
+                // -Dchrome.switches="$HEADLESS_OPTS"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
