@@ -20,11 +20,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/luisDevPKG/porvenirTest_req2.git'
 
                 // Run Maven clean.
-                sh '
+                sh '''
                 mvn clean verify \
                 -Dwebdriver.driver=chrome \
                 -Dchrome.switches="$HEADLESS_OPTS"
-                '
+                '''
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
