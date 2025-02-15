@@ -5,10 +5,6 @@ pipeline {
         maven "Maven"
     }
 
-    environment {
-        HEADLESS_OPTS = "--headless --disable-gpu --window-size=1920x1080 --no-sandbox --disable-dev-shm-usage"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -18,12 +14,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                sh '''
-                mvn clean verify \
-                -Dwebdriver.driver=chrome \
-                -Dchrome.switches="$HEADLESS_OPTS" \
-                -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions src/test/resources/features -Dverbose=true"
-                '''
+                sh 'mvn clean verify -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions --features src/test/resources/features -Dverbose=true"'
             }
         }
 
