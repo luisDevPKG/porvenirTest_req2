@@ -1,4 +1,4 @@
-package stepdefinitions;
+package stepDefinitions;
 // Importación de las bibliotecas necesarias para usar Cucumber y Serenity
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
