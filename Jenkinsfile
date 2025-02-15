@@ -22,14 +22,7 @@ pipeline {
                 mvn clean verify \
                 -Dwebdriver.driver=chrome \
                 -Dchrome.switches="$HEADLESS_OPTS" \
-                -Dserenity.outputDirectory=target/serenity-reports
                 '''
-            }
-        }
-
-        stage("Verificar Reportes") {
-            steps {
-                sh 'ls -R target/serenity-reports || echo "No se generaron reportes"'
             }
         }
 
@@ -40,14 +33,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo "Finalizando ejecución: Verificando y archivando reportes..."
-            archiveArtifacts artifacts: 'target/serenity-reports/**/*', allowEmptyArchive: true
-            junit '**/target/surefire-reports/*.xml'
-        }
-        failure {
-            echo "🚨 Hubo fallos en la ejecución. Revisa los logs."
-        }
-    }
 }
