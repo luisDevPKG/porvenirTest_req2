@@ -120,7 +120,7 @@
                     <properties>
                         <property>
                             <name>cucumber.options</name>
-                            <value>--plugin pretty --glue src/test/java --features src/test/resources</value>
+                            <value>--plugin pretty --glue src/test/java --features src/test/resources/features/Agradecimientos.feature</value>
                         </property>
                     </properties>
                 </configuration>
