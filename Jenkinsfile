@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                sh 'mvn clean verify -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions --features src/test/resources/features -Dverbose=true"'
+                sh 'mvn test -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions --features src/test/resources/features --monochrome"'
             }
         }
 
