@@ -22,7 +22,7 @@ pipeline {
                 mvn clean verify \
                 -Dwebdriver.driver=chrome \
                 -Dchrome.switches="$HEADLESS_OPTS" \
-                -Dcucumber.options="--plugin pretty --glue src/test/java"
+                -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions"
                 '''
             }
         }
