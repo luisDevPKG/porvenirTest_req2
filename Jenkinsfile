@@ -8,6 +8,11 @@ pipeline {
         maven "Maven"
     }
 
+    environment {
+         // Configurar Serenity para headless mode
+         HEADLESS_OPTS = "--headless --disable-gpu --window-size=1920x1080 --no-sandbox --disable-dev-shm-usage"
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -15,11 +20,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/luisDevPKG/porvenirTest_req2.git'
 
                 // Run Maven clean.
-                sh 'mvn clean test'
-
-                //mvn clean verify \
-                // -Dwebdriver.driver=chrome \
-                // -Dchrome.switches="$HEADLESS_OPTS"
+                sh '
+                mvn clean verify \
+                -Dwebdriver.driver=chrome \
+                -Dchrome.switches="$HEADLESS_OPTS"
+                '
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
