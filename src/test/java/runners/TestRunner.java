@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/Agradecimientos.feature",
         glue = {"stepdefinitions"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        plugin = {"pretty", "html:target/cucumber-reports/cucumber-html-report.html"}
+        //plugin = {"pretty", "html:target/cucumber-reports/cucumber-html-report.html"}
 )
 public class TestRunner {
 }

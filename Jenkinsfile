@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-         HEADLESS_OPTS = "--headless --disable-gpu --window-size=1920x1080 --no-sandbox --disable-dev-shm-usage"
+        HEADLESS_OPTS = "--headless --disable-gpu --window-size=1920x1080 --no-sandbox --disable-dev-shm-usage"
     }
 
     stages {
@@ -33,10 +33,21 @@ pipeline {
             }
         }
 
-        stage("Imprimo cosas") {
+        stage("Mensaje Final") {
             steps {
-                echo "Aqui va un stage aparte"
+                echo "Pipeline ejecutado con éxito 🎉"
             }
+        }
+    }
+
+    post {
+        always {
+            echo "Finalizando ejecución: Verificando y archivando reportes..."
+            archiveArtifacts artifacts: 'target/serenity-reports/**/*', allowEmptyArchive: true
+            junit '**/target/surefire-reports/*.xml'
+        }
+        failure {
+            echo "🚨 Hubo fallos en la ejecución. Revisa los logs."
         }
     }
 }
