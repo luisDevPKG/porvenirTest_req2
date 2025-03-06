@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 // Importación de métodos estáticos de Serenity para manejar actores
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import org.openqa.selenium.chrome.ChromeOptions;
 import screenplay.questions.ProductosEnCarro;
 import screenplay.tasks.*;
 import net.serenitybdd.screenplay.Actor;
@@ -29,6 +30,19 @@ public class AgradecimientosStepDefinitions {
 
     @io.cucumber.java.Before
     public void setTheStage() {
+
+        // Comprobar si estamos en Jenkins utilizando la variable de entorno "CI"
+        boolean isJenkins = System.getenv("CI") != null;
+
+        ChromeOptions options = new ChromeOptions();
+
+        // Si estamos en Jenkins, activar el modo Headless
+        if (isJenkins) {
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-allow-origins=*");
+        }
+
         // Configura el escenario inicial para el actor en la prueba
         OnStage.setTheStage(new OnlineCast());
         usuario = OnStage.theActorCalled("Usuario"); // El actor se llama "Usuario"
