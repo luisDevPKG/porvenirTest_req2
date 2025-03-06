@@ -14,7 +14,10 @@ pipeline {
 
         stage('Build & Test') {
             steps {
+                sh 'pwd'  // Imprime el directorio de trabajo
+                sh 'ls -la src/test/resources/features'  // Verifica que la carpeta de características esté presente
                 sh 'mvn test -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions --features src/test/resources/features --monochrome"'
+
             }
         }
 
