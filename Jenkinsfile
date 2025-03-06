@@ -11,21 +11,23 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/luisDevPKG/porvenirTest_req2.git'
             }
         }
-
         stage('Build & Test') {
             steps {
                 sh 'pwd'  // Imprime el directorio de trabajo
                 sh 'ls -la src/test/resources/features'  // Verifica que la carpeta de características esté presente
-                sh 'mvn test -Dcucumber.options="--plugin pretty --glue src/test/java/stepDefinitions --features src/test/resources/features --monochrome"'
-
+                sh 'mvn clean install'
             }
+            post {
+                 success {
+                          junit '**/target/surefire-reports/TEST-*.xml'
+                          archiveArtifacts 'target/*.jar'
+                          }
+                 }
         }
-
         stage("Mensaje Final") {
             steps {
                 echo "Pipeline ejecutado con éxito 🎉"
             }
         }
     }
-
 }
