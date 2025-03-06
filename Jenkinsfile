@@ -17,12 +17,6 @@ pipeline {
                 sh 'ls -la src/test/resources/features'  // Verifica que la carpeta de características esté presente
                 sh 'mvn clean install'
             }
-            post {
-                 success {
-                          junit '**/target/surefire-reports/TEST-*.xml'
-                          archiveArtifacts 'target/*.jar'
-                          }
-                 }
         }
         stage("Mensaje Final") {
             steps {
